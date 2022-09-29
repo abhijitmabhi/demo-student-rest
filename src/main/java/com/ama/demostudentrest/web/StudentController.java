@@ -2,6 +2,8 @@ package com.ama.demostudentrest.web;
 
 import com.ama.demostudentrest.pojo.Student;
 import com.ama.demostudentrest.service.StudentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +12,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Tag(name = "Student Controller", description = "Create and retrieve students")
 public class StudentController {
     StudentService studentService;
     public StudentController(StudentService studentService){
         this.studentService = studentService;
     }
 
+    @Operation(summary = "Get students", description = "Get all students")
     @GetMapping("/student/all")
     public ResponseEntity<List<Student>> getAllStudents(){
         List<Student> students = studentService.getStudents();
